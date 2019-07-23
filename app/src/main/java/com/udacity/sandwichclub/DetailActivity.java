@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -36,14 +39,32 @@ public class DetailActivity extends AppCompatActivity {
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
-        Sandwich sandwich = JsonUtils.parseSandwichJson(json);  // insert dummy data here
+
+        // Placeholder data
+        String sandwichName = "BLT";
+
+        ArrayList<String> alsoKnownAs = new ArrayList<>();
+        alsoKnownAs.add("Bacon, Lettuce, and Tomato");
+        alsoKnownAs.add("Hippie Sandwich");
+
+        String placeOfOrigin = "USA";
+
+        String description = "A sandwich containing bacon, lettuce, and tomatoes.";
+
+        ArrayList<String> ingredients = new ArrayList<>();
+        ingredients.add("Bacon");
+        ingredients.add("Lettuce");
+        ingredients.add("Tomato");
+        ingredients.add("Bread");
+
+        Sandwich sandwich = new Sandwich(sandwichName, alsoKnownAs, placeOfOrigin, description, null, ingredients); // JsonUtils.parseSandwichJson(json);  // insert dummy data here
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
             return;
         }
 
-        populateUI();
+        populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -56,7 +77,36 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {  // add (Sandwich sandwich)
-        // pass in sandwich object
+    private void populateUI(Sandwich sandwich) {
+        // Eventually we'll pass in a sandwich object
+        TextView name = findViewById(R.id.sandwich_name_tv);
+        name.setText(sandwich.getMainName());
+
+        // To view an ArrayList in a TextView
+        TextView alsoKnownAs = findViewById(R.id.also_known_tv);
+        String alsoKnownAsString = "";
+        for (String s : sandwich.getAlsoKnownAs()) {
+            if (!alsoKnownAsString.isEmpty()){
+                alsoKnownAsString += "\n";
+            }
+            alsoKnownAsString += s;
+        }
+        alsoKnownAs.setText(alsoKnownAsString);
+
+        TextView ingredients = findViewById(R.id.ingredients_tv);
+        String ingredientsString = "";
+        for (String s : sandwich.getIngredients()) {
+            if(!ingredientsString.isEmpty()) {
+                ingredientsString += "\n";
+            }
+            ingredientsString += s;
+        }
+        ingredients.setText(ingredientsString);
+
+        TextView placeOfOrigin = findViewById(R.id.origin_tv);
+        placeOfOrigin.setText(sandwich.getPlaceOfOrigin());
+
+        TextView description = findViewById(R.id.description_tv);
+        description.setText(sandwich.getDescription());
     }
 }
