@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
-        Sandwich sandwich = JsonUtils.parseSandwichJson(json);
+        Sandwich sandwich = JsonUtils.parseSandwichJson(json);  // insert dummy data here
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
@@ -56,7 +56,7 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
-
+    private void populateUI() {  // add (Sandwich sandwich)
+        // pass in sandwich object
     }
 }
