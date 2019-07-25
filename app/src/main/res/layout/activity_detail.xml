@@ -27,7 +27,8 @@
             android:textStyle="bold"
             android:layout_gravity="bottom"
             android:paddingLeft="16dp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:paddingRight="16dp"/>
 
     </FrameLayout>
 
@@ -115,5 +116,16 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <!-- Error Message -->
+    <TextView
+        android:id="@+id/error_message_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:padding="16dp"
+        android:text="@string/detail_error_message"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
 
 </LinearLayout>
