@@ -42,6 +42,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/aka_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/detail_also_known_as_label"
@@ -60,6 +61,7 @@
                 android:paddingRight="16dp"/>
 
             <TextView
+                android:id="@+id/ingredients_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/detail_ingredients_label"
@@ -78,6 +80,7 @@
                 android:paddingRight="16dp"/>
 
             <TextView
+                android:id="@+id/origin_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/detail_place_of_origin_label"
@@ -96,6 +99,7 @@
                 android:paddingRight="16dp"/>
 
             <TextView
+                android:id="@+id/description_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/detail_description_label"
@@ -116,16 +120,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-    <!-- Error Message -->
-    <TextView
-        android:id="@+id/error_message_display"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:padding="16dp"
-        android:text="@string/detail_error_message"
-        android:layout_gravity="center"
-        android:visibility="invisible"/>
 
 </LinearLayout>

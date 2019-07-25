@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,11 +51,11 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         populateUI(sandwich);
-        Picasso.with(this)
-                .load(sandwich.getImage())
-                .into(ingredientsIv);
+            Picasso.with(this)
+                    .load(sandwich.getImage())
+                    .into(ingredientsIv);
 
-        setTitle(sandwich.getMainName());
+            setTitle(sandwich.getMainName());
     }
 
     private void closeOnError() {
@@ -63,10 +65,13 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI(Sandwich sandwich) {
 
+        // Sandwich Name
         TextView name = findViewById(R.id.sandwich_name_tv);
         name.setText(sandwich.getMainName());
 
+        // Also Known As
         // View an ArrayList in a TextView
+        TextView akaTitle = findViewById(R.id.aka_title);
         TextView alsoKnownAs = findViewById(R.id.also_known_tv);
         String alsoKnownAsString = "";
         for (String s : sandwich.getAlsoKnownAs()) {
@@ -77,20 +82,48 @@ public class DetailActivity extends AppCompatActivity {
         }
         alsoKnownAs.setText(alsoKnownAsString);
 
+        // Ingredients
+        TextView ingredientsTitle = findViewById(R.id.ingredients_title);
         TextView ingredients = findViewById(R.id.ingredients_tv);
         String ingredientsString = "";
         for (String s : sandwich.getIngredients()) {
-            if(!ingredientsString.isEmpty()) {
+            if (!ingredientsString.isEmpty()) {
                 ingredientsString += "\n";
             }
             ingredientsString += s;
         }
         ingredients.setText(ingredientsString);
 
+        // Place of Origin
+        TextView originTitle = findViewById(R.id.origin_title);
         TextView placeOfOrigin = findViewById(R.id.origin_tv);
         placeOfOrigin.setText(sandwich.getPlaceOfOrigin());
 
+        // Sandwich Description
+        TextView descriptionTitle = findViewById(R.id.description_title);
         TextView description = findViewById(R.id.description_tv);
         description.setText(sandwich.getDescription());
+
+        // Hide any TextViews that are missing data
+        if (sandwich.getAlsoKnownAs().isEmpty()) {
+            alsoKnownAs.setVisibility(View.GONE);
+            akaTitle.setVisibility(View.GONE);
+        }
+
+        if (sandwich.getIngredients().isEmpty()) {
+            ingredients.setVisibility(View.GONE);
+            ingredientsTitle.setVisibility(View.GONE);
+        }
+
+        if (sandwich.getPlaceOfOrigin().isEmpty()) {
+            placeOfOrigin.setVisibility(View.GONE);
+            originTitle.setVisibility(View.GONE);
+        }
+
+        if (sandwich.getDescription().isEmpty()) {
+            description.setVisibility(View.GONE);
+            descriptionTitle.setVisibility(View.GONE);
+        }
+
     }
 }
