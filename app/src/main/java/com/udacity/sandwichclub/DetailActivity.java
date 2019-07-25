@@ -1,6 +1,7 @@
 package com.udacity.sandwichclub;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -40,24 +41,7 @@ public class DetailActivity extends AppCompatActivity {
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
 
-        // Placeholder data
-        String sandwichName = "BLT";
-
-        ArrayList<String> alsoKnownAs = new ArrayList<>();
-        alsoKnownAs.add("Bacon, Lettuce, and Tomato");
-        alsoKnownAs.add("Hippie Sandwich");
-
-        String placeOfOrigin = "USA";
-
-        String description = "A sandwich containing bacon, lettuce, and tomatoes.";
-
-        ArrayList<String> ingredients = new ArrayList<>();
-        ingredients.add("Bacon");
-        ingredients.add("Lettuce");
-        ingredients.add("Tomato");
-        ingredients.add("Bread");
-
-        Sandwich sandwich = new Sandwich(sandwichName, alsoKnownAs, placeOfOrigin, description, null, ingredients); // JsonUtils.parseSandwichJson(json);  // insert dummy data here
+        Sandwich sandwich = JsonUtils.parseSandwichJson(json);
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
@@ -78,11 +62,11 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI(Sandwich sandwich) {
-        // Eventually we'll pass in a sandwich object
+
         TextView name = findViewById(R.id.sandwich_name_tv);
         name.setText(sandwich.getMainName());
 
-        // To view an ArrayList in a TextView
+        // View an ArrayList in a TextView
         TextView alsoKnownAs = findViewById(R.id.also_known_tv);
         String alsoKnownAsString = "";
         for (String s : sandwich.getAlsoKnownAs()) {
